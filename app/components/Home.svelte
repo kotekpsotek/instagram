@@ -10,8 +10,12 @@
         </flexboxLayout>
         <flexboxLayout row="1">
         </flexboxLayout>
-        <flexboxLayout row="2">
-
+        <flexboxLayout row="2" id="nav-stripe">
+            <label id="home" text="&#xf015;" class="fas"/>
+            <label id="search" text="&#xf002;" class="fas"/>
+            <label id="videos" text="&#xf008;" class="fas"/>
+            <label id="shop" text="&#xf290;" class="fas"/>
+            <label id="account" text="&#xf2bd;" class="fas"/>
         </flexboxLayout>
     </gridLayout>
 </page>
@@ -43,5 +47,12 @@
         margin: 0px;
         color: black;
         text-align: center;
+    }
+
+    #nav-stripe > label {
+        text-align: center;
+        font-size: 24;
+        width: calc(100% / 5);
+        color: black;
     }
 </style>
