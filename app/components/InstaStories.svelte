@@ -1,9 +1,9 @@
 <scrollView orientation="horizontal" scrollBarIndicatorVisible={false} width="100%">
   <flexboxLayout>
-    {#each instastoriesList as { img, name, my }}
-      <flexboxLayout id="storie" flexDirection="column" justifyContent="center" alignItems="center">
+    {#each instastoriesList as { img, name, my, viewed }, id}
+      <flexboxLayout id="storie" flexDirection="column" justifyContent="center" alignItems="center" on:tap={instastorieClicked(id)}>
         <absoluteLayout>
-            <flexboxLayout id="image-gradient" justifyContent="center" alignItems="center">
+            <flexboxLayout id="image-gradient" class="{viewed ? "viewed" : ""}" justifyContent="center" alignItems="center">
                 <flexboxLayout id="image-wr" justifyContent="center" alignItems="center">
                     <image src={img}/>
                 </flexboxLayout>
@@ -19,7 +19,7 @@
 </scrollView>
 
 <script lang="ts">
-    const instastoriesList: {
+    let instastoriesList: {
       img: string;
       name: string;
       my?: boolean;
@@ -52,6 +52,13 @@
             viewed: false
         }
     ];
+
+    /** When user click on instastorie */
+    function instastorieClicked(id: number) {
+        return () => {
+            instastoriesList[id].viewed = true;
+        }
+    }
 </script>
 
 <style>
@@ -65,6 +72,11 @@
         height: 80;
         background-image: linear-gradient(45deg, orangered, rgb(166, 7, 172)); 
         border-radius: 50%;       
+    }
+
+    #image-gradient.viewed {
+        background-image: none;
+        background-color: rgb(18, 154, 227);
     }
 
     #image-wr {
