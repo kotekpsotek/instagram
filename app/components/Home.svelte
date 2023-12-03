@@ -8,8 +8,9 @@
                 <label id="message" text="&#xf075;" class="fas"/>
             </flexboxLayout>
         </flexboxLayout>
-        <flexboxLayout row="1">
-        </flexboxLayout>
+        <gridLayout row="1" rows="auto, *">
+            <InstaStories/>
+        </gridLayout>
         <flexboxLayout row="2" id="nav-stripe">
             <label id="home" text="&#xf015;" class="fas"/>
             <label id="search" text="&#xf002;" class="fas"/>
@@ -21,6 +22,8 @@
 </page>
 
 <script lang="ts">
+    import InstaStories from "./InstaStories.svelte";
+
     let message: string = "Blank Svelte Native App"
 </script>
 
