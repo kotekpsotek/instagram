@@ -46,8 +46,8 @@
         },
         {
             profile_img: "~/assets/cat.jpg",
-            user_name: "Furry cat",
-            post_img: "~/assets/girl-gun.jpg",
+            user_name: "Furry dog",
+            post_img: "~/assets/girl-1.jpg",
             liked_by: ["Anna", "tom"],
             location: "Warsaw, Mazovia",
             description: "Im furry really cat. And 11111111111111111111111111111111111111111 222222222222222222222222222222222 3333333333333333333333333",
