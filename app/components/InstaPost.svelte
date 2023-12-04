@@ -14,9 +14,9 @@
     <image id="post-img" src={post.post_img}/>
     <flexboxLayout id="action-side" justifyContent="space-between">
         <flexboxLayout id="fst" justifyContent="space-between" width="25%">
-            <label id="like" class="fas" text="&#xf004;"/>
+            <label id="like" class="fas {post.you_like ? "i-like" : ""}" text="&#xf004;" on:tap={likeAction}/>
             <label id="comment" class="fas" text="&#xf075;"/>
-            <label id="send" class="fas" text="&#xf004;"/>
+            <label id="send" class="fas" text="&#xf1d8;"/>
         </flexboxLayout>
         <flexboxLayout id="snd">
             <label class="fas" text="&#xf02e;"/>
@@ -76,7 +76,9 @@
     }
     else likedyByPersons = []
 
-    console.log(likedyByPersons)
+    function likeAction() {
+        post.you_like = !post.you_like;
+    }
 </script>
 
 <style>
@@ -154,5 +156,9 @@
     #bottom-side {
         margin-top: 8;
         margin-bottom: 5;
+    }
+
+    .i-like {
+        color: rgb(181, 4, 4) !important;
     }
 </style>

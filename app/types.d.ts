@@ -9,7 +9,8 @@ interface Post {
     description: string,
     comments: unknown[],
     /** Publication date */
-    pub_date: Date
+    pub_date: Date,
+    you_like: boolean
 }
 
 type Posts = Post[];
