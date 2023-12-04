@@ -22,15 +22,47 @@
             <label class="fas" text="&#xf02e;"/>
         </flexboxLayout>
     </flexboxLayout>
+    <flexboxLayout id="middle-side" flexDirection="column">
+        <stackLayout orientation="horizontal">
+            <!-- <absoluteLayout id="profile-imgs">
+                <label/>
+                <label/>
+            </absoluteLayout> -->
+            <label id="likes-desc">
+                {#if likedyByPersons.length}
+                    Liked by {likedyByPersons.join(", ")}
+                    {#if post.liked_by.length - likedyByPersons.length}
+                        and {post.liked_by.length - likedyByPersons.length} others
+                    {/if}
+                {:else}
+                    0 Likes
+                {/if}
+            </label>
+        </stackLayout>
+        <stackLayout id="description-wr" orientation="horizontal">
+            <label id="user-name-2">{post.user_name}</label>
+            <label id="description">{post.description}</label>
+        </stackLayout>
+    </flexboxLayout>
 </flexboxLayout>
 
 <script lang="ts">
     export let post: Post;
+
+    let likedyByPersons: string[];
+
+    if (post.liked_by.length >= 2) {
+        likedyByPersons = post.liked_by.splice(-1, -3)
+    }
+    else if (post.liked_by.length == 1) {
+        likedyByPersons = post.liked_by
+    }
+    else likedyByPersons = []
 </script>
 
 <style>
     #upper-side {
-        padding-left: 20;
+        padding-left: 10;
         padding-right: 10;
     }
 
