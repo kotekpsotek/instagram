@@ -44,6 +44,16 @@
             <label id="description">{post.description}</label>
         </stackLayout>
     </flexboxLayout>
+    <label id="comments">
+        {#if post.comments.length}
+            See all {post.comments.length} comments
+        {:else}
+            0 comments
+        {/if}
+    </label>
+    <label id="date">
+        {new Date().toLocaleDateString()}
+    </label>
 </flexboxLayout>
 
 <script lang="ts">

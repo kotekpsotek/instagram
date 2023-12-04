@@ -6,7 +6,10 @@ interface Post {
     post_img: string,
     /** Names who likes this post */
     liked_by: string[],
-    description: string
+    description: string,
+    comments: unknown[],
+    /** Publication date */
+    pub_date: Date
 }
 
 type Posts = Post[];

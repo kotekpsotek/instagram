@@ -39,7 +39,9 @@
             post_img: "~/assets/girl-gun.jpg",
             liked_by: [],
             location: "Warsaw, Mazovia",
-            description: "Im furry really cat"
+            description: "Im furry really cat",
+            comments: [],
+            pub_date: new Date()
         }
     ];
 </script>
