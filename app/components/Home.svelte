@@ -10,6 +10,12 @@
         </flexboxLayout>
         <gridLayout row="1" rows="auto, *">
             <InstaStories/>
+            <scrollView row="1" scrollBarIndicatorVisible={false}>
+                <flexboxLayout id="posts-board" flexDirection="column" marginTop="5">
+                    <label backgroundColor="red"></label>
+                    <InstaPost/>
+                </flexboxLayout>
+            </scrollView>
         </gridLayout>
         <flexboxLayout row="2" id="nav-stripe">
             <label id="home" text="&#xf015;" class="fas"/>
@@ -22,9 +28,19 @@
 </page>
 
 <script lang="ts">
+    import InstaPost from "./InstaPost.svelte";
     import InstaStories from "./InstaStories.svelte";
 
-    let message: string = "Blank Svelte Native App"
+    let posts: {
+        profile_img: string,
+        /** Name location assigned to post */
+        location?: string,
+        user_name: string,
+        post_img: string,
+        /** Names who likes this post */
+        liked_by: string[],
+        description: string
+    }[]
 </script>
 
 <style>
