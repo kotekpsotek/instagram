@@ -36,7 +36,7 @@
         {
             profile_img: "~/assets/cat.jpg",
             user_name: "Furry cat",
-            post_img: "~/assets/cat.jpg",
+            post_img: "~/assets/girl-gun.jpg",
             liked_by: [],
             location: "Warsaw, Mazovia",
             description: "Im furry really cat"

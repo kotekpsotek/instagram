@@ -11,6 +11,7 @@
         </flexboxLayout>
         <label id="options" class="fas">&#xf141;</label>
     </flexboxLayout>
+    <image id="post-img" src={post.post_img}/>
 </flexboxLayout>
 
 <script lang="ts">
@@ -49,5 +50,11 @@
 
     #options {
         font-size: 20;
+    }
+
+    #post-img {
+        background-color: whitesmoke;
+        width: 100%;
+        height: 330;
     }
 </style>
