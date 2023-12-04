@@ -12,6 +12,16 @@
         <label id="options" class="fas">&#xf141;</label>
     </flexboxLayout>
     <image id="post-img" src={post.post_img}/>
+    <flexboxLayout id="action-side" justifyContent="space-between">
+        <flexboxLayout id="fst" justifyContent="space-between" width="25%">
+            <label id="like" class="fas" text="&#xf004;"/>
+            <label id="comment" class="fas" text="&#xf075;"/>
+            <label id="send" class="fas" text="&#xf004;"/>
+        </flexboxLayout>
+        <flexboxLayout id="snd">
+            <label class="fas" text="&#xf02e;"/>
+        </flexboxLayout>
+    </flexboxLayout>
 </flexboxLayout>
 
 <script lang="ts">
@@ -56,5 +66,16 @@
         background-color: whitesmoke;
         width: 100%;
         height: 330;
+    }
+
+    #action-side {
+        padding-top: 12;
+        padding-bottom: 12;
+        padding-left: 10;
+        padding-right: 10;
+    }
+
+    #fst, #snd {
+        font-size: 25;
     }
 </style>
