@@ -8,16 +8,16 @@
                 <label id="message" text="&#xf075;" class="fas"/>
             </flexboxLayout>
         </flexboxLayout>
-        <gridLayout row="1" rows="auto, *">
-            <InstaStories/>
-            <scrollView row="1" scrollBarIndicatorVisible={false}>
-                <flexboxLayout id="posts-board" flexDirection="column" marginTop="5">
+        <scrollView row="1" scrollBarIndicatorVisible={false}>
+            <gridLayout rows="auto, auto">
+                <InstaStories/>
+                <flexboxLayout row=1 id="posts-board" flexDirection="column" marginTop="5">
                     {#each posts as post}
                         <InstaPost {post}/>
                     {/each}
                 </flexboxLayout>
-            </scrollView>
-        </gridLayout>
+            </gridLayout>
+        </scrollView>
         <flexboxLayout row="2" id="nav-stripe">
             <label id="home" text="&#xf015;" class="fas"/>
             <label id="search" text="&#xf002;" class="fas"/>
@@ -41,7 +41,19 @@
             location: "Warsaw, Mazovia",
             description: "Im furry really cat. And 11111111111111111111111111111111111111111 222222222222222222222222222222222 3333333333333333333333333",
             comments: ["2", "2", "2", "a", "q", "q", "a"],
-            pub_date: new Date()
+            pub_date: new Date(),
+            you_like: false
+        },
+        {
+            profile_img: "~/assets/cat.jpg",
+            user_name: "Furry cat",
+            post_img: "~/assets/girl-gun.jpg",
+            liked_by: ["Anna", "tom"],
+            location: "Warsaw, Mazovia",
+            description: "Im furry really cat. And 11111111111111111111111111111111111111111 222222222222222222222222222222222 3333333333333333333333333",
+            comments: ["2", "2", "2", "a", "q", "q", "a"],
+            pub_date: new Date(),
+            you_like: false
         }
     ];
 </script>
