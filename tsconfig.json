@@ -14,12 +14,12 @@
       "@/*": ["app/*"]
     },
     "typeRoots": ["types"],
-    "types": ["node"],
+    "types": ["node", "./app/types.d.ts"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "include": ["app", "types"],
   "exclude": ["node_modules", "platforms"]

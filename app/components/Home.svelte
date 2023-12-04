@@ -12,8 +12,9 @@
             <InstaStories/>
             <scrollView row="1" scrollBarIndicatorVisible={false}>
                 <flexboxLayout id="posts-board" flexDirection="column" marginTop="5">
-                    <label backgroundColor="red"></label>
-                    <InstaPost/>
+                    {#each posts as post}
+                        <InstaPost {post}/>
+                    {/each}
                 </flexboxLayout>
             </scrollView>
         </gridLayout>
@@ -31,16 +32,16 @@
     import InstaPost from "./InstaPost.svelte";
     import InstaStories from "./InstaStories.svelte";
 
-    let posts: {
-        profile_img: string,
-        /** Name location assigned to post */
-        location?: string,
-        user_name: string,
-        post_img: string,
-        /** Names who likes this post */
-        liked_by: string[],
-        description: string
-    }[]
+    let posts: Posts = [
+        {
+            profile_img: "~/assets/cat.jpg",
+            user_name: "Furry cat",
+            post_img: "~/assets/cat.jpg",
+            liked_by: [],
+            location: "Warsaw, Mazovia",
+            description: "Im furry really cat"
+        }
+    ];
 </script>
 
 <style>
@@ -73,5 +74,9 @@
         font-size: 24;
         width: calc(100% / 5);
         color: black;
+    }
+
+    #posts-board {
+        background-color: rgb(198, 198, 198);
     }
 </style>
