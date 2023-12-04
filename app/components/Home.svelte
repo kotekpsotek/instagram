@@ -37,10 +37,10 @@
             profile_img: "~/assets/cat.jpg",
             user_name: "Furry cat",
             post_img: "~/assets/girl-gun.jpg",
-            liked_by: [],
+            liked_by: ["Anna", "tom"],
             location: "Warsaw, Mazovia",
-            description: "Im furry really cat",
-            comments: [],
+            description: "Im furry really cat. And 11111111111111111111111111111111111111111 222222222222222222222222222222222 3333333333333333333333333",
+            comments: ["2", "2", "2", "a", "q", "q", "a"],
             pub_date: new Date()
         }
     ];

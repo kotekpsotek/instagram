@@ -28,32 +28,39 @@
                 <label/>
                 <label/>
             </absoluteLayout> -->
-            <label id="likes-desc">
+            <stackLayout orientation="horizontal">
                 {#if likedyByPersons.length}
-                    Liked by {likedyByPersons.join(", ")}
+                    <label>Liked by </label>
+                    <label id="like-pos">{likedyByPersons.join(", ")}</label>
                     {#if post.liked_by.length - likedyByPersons.length}
-                        and {post.liked_by.length - likedyByPersons.length} others
+                        <label>and</label> 
+                        <label id="like-pos">{post.liked_by.length - likedyByPersons.length}</label>
+                        <label>others</label>
                     {/if}
                 {:else}
-                    0 Likes
+                    <label id="like-pos">0 Likes</label>
                 {/if}
-            </label>
+            </stackLayout>
         </stackLayout>
         <stackLayout id="description-wr" orientation="horizontal">
-            <label id="user-name-2">{post.user_name}</label>
-            <label id="description">{post.description}</label>
+            <absoluteLayout marginRight=10>
+                <label id="user-name-2" top="0">{post.user_name}</label>
+            </absoluteLayout>
+            <label id="description" textWrap={true}>{post.description}</label>
         </stackLayout>
     </flexboxLayout>
-    <label id="comments">
-        {#if post.comments.length}
-            See all {post.comments.length} comments
-        {:else}
-            0 comments
-        {/if}
-    </label>
-    <label id="date">
-        {new Date().toLocaleDateString()}
-    </label>
+    <flexboxLayout id="bottom-side" justifyContent="space-between">
+        <label id="comments">
+            {#if post.comments.length}
+                See all {post.comments.length} comments
+            {:else}
+                0 comments
+            {/if}
+        </label>
+        <label id="date">
+            {new Date().toLocaleDateString()}
+        </label>
+    </flexboxLayout>
 </flexboxLayout>
 
 <script lang="ts">
@@ -62,12 +69,14 @@
     let likedyByPersons: string[];
 
     if (post.liked_by.length >= 2) {
-        likedyByPersons = post.liked_by.splice(-1, -3)
+        likedyByPersons = post.liked_by.slice(0, 2)
     }
     else if (post.liked_by.length == 1) {
         likedyByPersons = post.liked_by
     }
     else likedyByPersons = []
+
+    console.log(likedyByPersons)
 </script>
 
 <style>
@@ -119,5 +128,31 @@
 
     #fst, #snd {
         font-size: 25;
+    }
+
+    #middle-side, #comments, #date {
+        padding-left: 10;
+        padding-right: 10;
+    }
+
+    #like-pos {
+        color: black;
+        font-weight: bold;
+        font-size: 16;
+    }
+
+    #description-wr {
+        margin-top: 2;
+        font-size: 17;
+    }
+
+    #user-name-2 {
+        font-weight: bold;
+        color: black;
+    }
+
+    #bottom-side {
+        margin-top: 8;
+        margin-bottom: 5;
     }
 </style>
