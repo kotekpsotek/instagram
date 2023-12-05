@@ -5,11 +5,15 @@
     </actionBar>
     <scrollView scrollBarIndicatorVisible={false}>
         <stackLayout paddingLeft=5 paddingRight=5 paddingTop=4 paddingBottom=4>
-            <button class="add-image" padding=20 height=250 on:tap={selectNewImage}>
-                <formattedString color="rgb(22, 103, 232)">
-                    <span text="&#xf1c5;" class="fas add-img-ico"/>
-                </formattedString>
-            </button>
+            {#if !image}
+                <button class="add-image" padding=20 height=250 on:tap={selectNewImage}>
+                    <formattedString color="rgb(22, 103, 232)">
+                        <span text="&#xf1c5;" class="fas add-img-ico"/>
+                    </formattedString>
+                </button>
+            {:else}
+                <image src={image.path} on:tap={unselectImage}/>
+            {/if}
             <textField hint="[Optional] location" id="loca" bind:text={location}/>
             <flexboxLayout flexDirection="column" alignItems="flex-end">
                 <textView hint="Description..." id="desc" bind:text={description}/>
@@ -24,48 +28,75 @@
 
 <script lang="ts">
     import { goBack } from "svelte-native";
-    import { Dialogs, Page, TapGestureEventData } from "@nativescript/core";
+    import { Dialogs, EventData, Page } from "@nativescript/core";
     import { newPost } from "~/stores";
+    import * as imagePickerPlugin from "@nativescript/imagepicker";
 
     let page: Page;
     
+    let image: undefined | imagePickerPlugin.ImagePickerSelection = undefined;
     let location = "";
     let description = "";
 
-    function selectNewImage(args: TapGestureEventData) {
+    function selectNewImage(args: EventData) {
+        let context = imagePickerPlugin.create({
+            mode: "single" // use "multiple" for multiple selection
+        });
+        context
+            .authorize()
+            .then(function() {
+                return context.present();
+            })
+            .then(function(selection) {
+                image = selection[0];
+            }).catch(function (e) {
+                console.error("Something went wrong!");
+            });
+    }
+
+    function unselectImage() {
+        image = undefined;
     }
 
     function accept() {
-        if (description.length > 10 && description.length < 5_000) {
-            Dialogs.alert({
-                title: 'Sent!',
-                message: 'You sent post!',
-                okButtonText: 'Go Back',
+        if (image?.path) {
+            if (description.length > 10 && description.length < 5_000) {
+                Dialogs.alert({
+                    title: 'Sent!',
+                    message: 'You sent post!',
+                    okButtonText: 'Go Back',
+                    cancelable: true,
+                })
+        
+                let newPFill: Post = {
+                    profile_img: "~/assets/cat.jpg",
+                    location: location,
+                    user_name: "Me",
+                    post_img: image?.path || "",
+                    liked_by: [],
+                    description: description,
+                    comments: [],
+                    pub_date: new Date(),
+                    you_like: false
+                }
+                $newPost = newPFill;
+        
+                // Go back
+                goBack();
+            }
+            else alert({
+                title: "Uuupps you must refill something!",
+                message: 'Minimum length of description is ' + 10 + ' and maximum is 5000 characters',
+                okButtonText: 'OK',
                 cancelable: true,
             })
-    
-            let newPFill: Post = {
-                profile_img: "~/assets/cat.jpg",
-                location: location,
-                user_name: "Me",
-                post_img: "",
-                liked_by: [],
-                description: description,
-                comments: [],
-                pub_date: new Date(),
-                you_like: false
-            }
-            $newPost = newPFill;
-    
-            // Go back
-            goBack();
-        }
+        } 
         else alert({
-            title: "Uuupps you must refill something!",
-            message: 'Minimum length of description is ' + 10 + ' and maximum is 5000 characters',
-            okButtonText: 'OK',
+            title: "No image!",
+            message: 'You must specify image',
+            okButtonText: 'I will pick-up',
             cancelable: true,
-        })
+        });
     }
 </script>
 
