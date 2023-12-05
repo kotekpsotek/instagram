@@ -1,4 +1,5 @@
-<page actionBarHidden={true}>
+<page actionBarHidden={true} on:navigatedFrom={navigatedFrom}>
+    <actionBar title="Timespace"/>
     <gridLayout rows="70, *, 70">
         <flexboxLayout row="0" id="logo-stripe" justifyContent="space-between">
             <label id="ig-logo">Instagram</label>
@@ -31,10 +32,15 @@
 </page>
 
 <script lang="ts">
-    import { TapGestureEventData } from "@nativescript/core";
+    import { NavigatedData, Page, TapGestureEventData } from "@nativescript/core";
     import InstaPost from "./InstaPost.svelte";
     import InstaStories from "./InstaStories.svelte";
+    import { navigate } from "svelte-native";
 
+    // Pages
+    import AddImage from "./AddImage.svelte";
+
+    // Posts list
     let posts: Posts = [
         {
             profile_img: "~/assets/cat.jpg",
@@ -63,9 +69,18 @@
     let selectedOptionTop: TopOptions | undefined;
     let selectedOptionBottom: BottomOptions = "home";
 
+    /** Switch between options */
     function pickUpTopOption(op: TopOptions) {
         return () => {
             selectedOptionTop = op;
+
+            switch(op) {
+                case "add":
+                    navigate({
+                        page: AddImage
+                    })
+                break;
+            }
         }
     }
     
@@ -73,6 +88,12 @@
         return (eg: TapGestureEventData) => {
             selectedOptionBottom = op;
         };
+    }
+
+    /** Handle navigation from */
+    function navigatedFrom(args: NavigatedData) {
+        selectedOptionTop = undefined;
+        selectedOptionBottom = "home"
     }
 </script>
 
