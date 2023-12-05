@@ -32,7 +32,7 @@
                 {#if likedyByPersons.length}
                     <label>Liked by </label>
                     <label id="like-pos">{likedyByPersons.join(", ")}</label>
-                    {#if post.liked_by.length - likedyByPersons.length}
+                    {#if post.liked_by.length - likedyByPersons.length > 0}
                         <label>and</label> 
                         <label id="like-pos">{post.liked_by.length - likedyByPersons.length}</label>
                         <label>others</label>

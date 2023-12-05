@@ -13,7 +13,7 @@
             <gridLayout rows="auto, auto">
                 <InstaStories/>
                 <flexboxLayout row=1 id="posts-board" flexDirection="column" marginTop="5">
-                    {#each posts as post}
+                    {#each posts as post (post.pub_date)}
                         <InstaPost {post}/>
                     {/each}
                 </flexboxLayout>
@@ -36,6 +36,7 @@
     import InstaPost from "./InstaPost.svelte";
     import InstaStories from "./InstaStories.svelte";
     import { navigate } from "svelte-native";
+    import { newPost } from "~/stores";
 
     // Pages
     import AddImage from "./AddImage.svelte";
@@ -94,6 +95,12 @@
     function navigatedFrom(args: NavigatedData) {
         selectedOptionTop = undefined;
         selectedOptionBottom = "home"
+    }
+
+    // Refresh posts when new post arrive 
+    $: if ($newPost) {
+        posts = [$newPost, ...posts];
+        $newPost = undefined;
     }
 </script>
 
