@@ -2,10 +2,10 @@
     <gridLayout rows="70, *, 70">
         <flexboxLayout row="0" id="logo-stripe" justifyContent="space-between">
             <label id="ig-logo">Instagram</label>
-            <flexboxLayout justifyContent="flex-end">
-                <label id="add" text="&#xf0fe;" class="fas"/>
-                <label id="loved" text="&#xf004;" class="fas"/>
-                <label id="message" text="&#xf075;" class="fas"/>
+            <flexboxLayout justifyContent="flex-end" id="top-navigation">
+                <label id="add" text="&#xf0fe;" class="fas {selectedOptionTop == "add" ? "option-selected" : ""}" on:tap={pickUpTopOption("add")}/>
+                <label id="loved" text="&#xf004;" class="fas {selectedOptionTop == "loved" ? "option-selected" : ""}" on:tap={pickUpTopOption("loved")}/>
+                <label id="message" text="&#xf075;" class="fas {selectedOptionTop == "message" ? "option-selected" : ""}" on:tap={pickUpTopOption("message")}/>
             </flexboxLayout>
         </flexboxLayout>
         <scrollView row="1" scrollBarIndicatorVisible={false}>
@@ -19,16 +19,19 @@
             </gridLayout>
         </scrollView>
         <flexboxLayout row="2" id="nav-stripe">
-            <label id="home" text="&#xf015;" class="fas"/>
-            <label id="search" text="&#xf002;" class="fas"/>
-            <label id="videos" text="&#xf008;" class="fas"/>
-            <label id="shop" text="&#xf290;" class="fas"/>
-            <label id="account" text="&#xf2bd;" class="fas"/>
+            {#if selectedOptionBottom}
+            <label id="home" text="&#xf015;" class="fas {selectedOptionBottom == "home" ? "option-selected" : ""}" on:tap={pickUpNavOption("home")}/>
+            <label id="search" text="&#xf002;" class="fas {selectedOptionBottom == "search" ? "option-selected" : ""}" on:tap={pickUpNavOption("search")}/>
+            <label id="videos" text="&#xf008;" class="fas {selectedOptionBottom == "videos" ? "option-selected" : ""}" on:tap={pickUpNavOption("videos")}/>
+            <label id="shop" text="&#xf290;" class="fas {selectedOptionBottom == "shop" ? "option-selected" : ""}" on:tap={pickUpNavOption("shop")}/>
+            <label id="account" text="&#xf2bd;" class="fas {selectedOptionBottom == "account" ? "option-selected" : ""}" on:tap={pickUpNavOption("account")}/>
+            {/if}
         </flexboxLayout>
     </gridLayout>
 </page>
 
 <script lang="ts">
+    import { TapGestureEventData } from "@nativescript/core";
     import InstaPost from "./InstaPost.svelte";
     import InstaStories from "./InstaStories.svelte";
 
@@ -56,6 +59,21 @@
             you_like: false
         }
     ];
+
+    let selectedOptionTop: TopOptions | undefined;
+    let selectedOptionBottom: BottomOptions = "home";
+
+    function pickUpTopOption(op: TopOptions) {
+        return () => {
+            selectedOptionTop = op;
+        }
+    }
+    
+    function pickUpNavOption(op: BottomOptions) {
+        return (eg: TapGestureEventData) => {
+            selectedOptionBottom = op;
+        };
+    }
 </script>
 
 <style>
@@ -83,6 +101,10 @@
         text-align: center;
     }
 
+    #add.option-selected, #loved.option-selected, #message.option-selected {
+        color: var(--switchable-red) !important;
+    } 
+
     #nav-stripe > label {
         text-align: center;
         font-size: 24;
@@ -92,5 +114,9 @@
 
     #posts-board {
         background-color: rgb(198, 198, 198);
+    }
+
+    #nav-stripe > label.option-selected {
+        color: var(--switchable-red) !important;
     }
 </style>

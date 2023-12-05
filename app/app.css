@@ -1,6 +1,10 @@
 ﻿/* @import '@nativescript/theme/css/core.css'; */
 /* @import '@nativescript/theme/css/default.css'; */
 
+page {
+  --switchable-red: rgb(221, 108, 108);
+}
+
 .fab {
   font-family: 'Font Awesome 5 Brands', 'fa-brands-400';
   font-weight: 400;
@@ -15,4 +19,3 @@
   font-family: 'Font Awesome 5 Free', 'fa-regular-400';
   font-weight: 400;
 }
-

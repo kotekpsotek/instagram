@@ -14,3 +14,7 @@ interface Post {
 }
 
 type Posts = Post[];
+
+type BottomOptions = "home" | "search" | "videos" | "shop" | "account" | "add" | "loved" | "message";
+
+type TopOptions = "add" | "loved" | "message";
